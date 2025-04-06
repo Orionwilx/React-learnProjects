@@ -2,20 +2,13 @@ import { useState, useCallback } from "react";
 import confetti from "canvas-confetti";
 import { TURN } from "../Constans";
 import { checkWinner, checkEndGame } from "./board";
-import { saveGameStorage, resetgameStorage } from "./Storage/Storage";
+import { saveGameStorage } from "./Storage/Storage";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export function GameLogic(){
-    const [board, setBoard] = useState(() => {
-    const boardFromStorage = window.localStorage.getItem("board");
-    return boardFromStorage
-      ? JSON.parse(boardFromStorage)
-      : Array(9).fill(null);
-  });
+export function GameLogic() {
+  const [board, setBoard] = useLocalStorage("board", Array(9).fill(null));
 
-  const [turn, setTurn] = useState(() => {
-    const turnFromStorage = window.localStorage.getItem("turn");
-    return turnFromStorage ? turnFromStorage : TURN.X;
-  });
+  const [turn, setTurn] = useLocalStorage("turn", TURN.X);
 
   const [winner, setWinner] = useState(null);
 
@@ -23,8 +16,6 @@ export function GameLogic(){
     setBoard(Array(9).fill(null));
     setTurn(TURN.X);
     setWinner(null);
-
-    resetgameStorage();
   };
 
   const updateBoard = useCallback(
@@ -55,7 +46,7 @@ export function GameLogic(){
         setWinner(false);
       }
     },
-    [board, turn, winner]
+    [board, turn, winner, setBoard, setTurn]
   );
 
   return {
