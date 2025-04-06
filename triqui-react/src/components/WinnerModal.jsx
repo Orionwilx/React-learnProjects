@@ -1,4 +1,4 @@
-import { Scuare } from "./Square";
+import { Square } from "./Square";
 
 export function WinnerModal({ winner, resetGame }) {
   if (winner === null) return null;
@@ -10,7 +10,7 @@ export function WinnerModal({ winner, resetGame }) {
       <div className="text">
         <h2>{winnerText}</h2>
 
-        <header className="win">{winner && <Scuare>{winner}</Scuare>}</header>
+        <header className="win">{winner && <Square>{winner}</Square>}</header>
 
         <footer>
           <button onClick={resetGame}>Empezar de nuevo</button>

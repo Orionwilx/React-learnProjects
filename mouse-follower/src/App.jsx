@@ -21,6 +21,12 @@ const FollowMouse = () => {
     };
   }, [enable]);
 
+  useEffect(() => {
+    document.body.classList.toggle("no-pointer", enable);
+    return () => {
+      document.body.classList.remove("no-pointer");
+    };
+  }, [enable]);
   return (
     <>
       <div
