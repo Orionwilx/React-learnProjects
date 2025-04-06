@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import confetti from "canvas-confetti";
 import { TURN } from "../Constans";
 import { checkWinner, checkEndGame } from "./board";
-import { saveGameStorage } from "./Storage/Storage";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export function GameLogic() {
@@ -28,11 +27,6 @@ export function GameLogic() {
 
       const newTurn = turn === TURN.X ? TURN.O : TURN.X;
       setTurn(newTurn);
-
-      saveGameStorage({
-        board: newBoard,
-        turn: newTurn,
-      });
 
       const newWinner = checkWinner(newBoard);
       if (newWinner) {
