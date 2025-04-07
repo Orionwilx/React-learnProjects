@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "standard": "^17.1.2",
     "vite": "^6.2.0"
   },
   "dependencies": {
@@ -16,5 +17,8 @@
     "react": "^19.1.0",
     "react-dom": "19.1.0",
     "react-prueba-tecnica": "file:"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/react-prueba-tecnica/.eslintrc.json"
   }
 }
