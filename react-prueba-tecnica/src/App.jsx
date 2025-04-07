@@ -31,13 +31,15 @@ export function App() {
   return (
     <main>
       <h1>app de gatitos</h1>
-      {fact && <p>{fact}</p>}
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt={`Imagen random con las primera 3 palabras del ${fact}`}
-        />
-      )}
+      <section>
+        {fact && <p>{fact}</p>}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={`Imagen random con las primera 3 palabras del ${fact}`}
+          />
+        )}
+      </section>
     </main>
   );
 }
