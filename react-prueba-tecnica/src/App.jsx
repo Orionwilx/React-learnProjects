@@ -1,23 +1,14 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import "./App.css";
-import { getRandomFact } from "./services/facts.js";
 import { useCatImage } from "./hooks/useCatImage.js";
+import { useCatFact } from "./hooks/useCatFact.js";
 
 export function App() {
-  const [fact, setfact] = useState("");
+  const { fact, refreshRandomFact } = useCatFact();
   const { imageUrl } = useCatImage({ fact });
 
-  // Recuperar frase random de la API de catfact
-  useEffect(() => {
-    getRandomFact().then((newFact) => setfact(newFact));
-  }, []);
-
-  // Recuperar imagen random de la API de cataas
-
   const handleClieck = async () => {
-    const newFatc = await getRandomFact();
-    setfact(newFatc);
+    refreshRandomFact();
   };
 
   return (
