@@ -1,37 +1,30 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./App.css";
-
-const CAT_ENDPOINT_UMAGE_URL = "https://cataas.com/cat/says/";
-const CAT_ENDPOINT_RANDOM_FACT = "https://catfact.ninja/fact";
+import { getRandomFact } from "./services/facts.js";
+import { useCatImage } from "./hooks/useCatImage.js";
 
 export function App() {
   const [fact, setfact] = useState("");
-  const [imageUrl, setImageUrl] = useState();
+  const { imageUrl } = useCatImage({ fact });
 
   // Recuperar frase random de la API de catfact
   useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then((res) => res.json())
-      .then((data) => {
-        const { fact } = data;
-        setfact(fact);
-      });
+    getRandomFact().then((newFact) => setfact(newFact));
   }, []);
-  // Recuperar imagen random de la API de cataas
-  useEffect(() => {
-    if (!fact) return;
-    const firstWord = fact.split(" ").slice(0, 3).join(" ");
 
-    fetch(`${CAT_ENDPOINT_UMAGE_URL}${firstWord}`).then((res) => {
-      setImageUrl(`${CAT_ENDPOINT_UMAGE_URL}${firstWord}`);
-    });
-  }, [fact]);
+  // Recuperar imagen random de la API de cataas
+
+  const handleClieck = async () => {
+    const newFatc = await getRandomFact();
+    setfact(newFatc);
+  };
 
   return (
     <main>
       <h1>app de gatitos</h1>
       <section>
+        <button onClick={handleClieck}> Get new Fact</button>
         {fact && <p>{fact}</p>}
         {imageUrl && (
           <img
